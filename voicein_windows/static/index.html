@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VoiceIn Windows</title><link rel="stylesheet" href="/style.css"></head>
+<body><main>
+<header><div><b>VoiceIn</b><span>WINDOWS ALPHA</span></div><i id="live">服务连接中</i></header>
+<section class="hero"><p>OUTPUT ROUTE</p><h1>说完之后，文字去哪里？</h1>
+<div class="routes">
+<label><input type="radio" name="output" value="focused"><strong>当前聚焦输入框</strong><small>录音开始时锁定目标，只填字，不发送</small></label>
+<label><input type="radio" name="output" value="codex"><strong>Codex 当前任务</strong><small>通过本机接口直接提交并触发任务</small></label>
+</div></section>
+<div class="grid"><section class="card"><h2>火山识别</h2>
+<label>鉴权方式<select id="auth"><option value="legacy">AppID + Access Token</option><option value="apikey">API Key</option></select></label>
+<div id="legacy"><label>AppID<input id="appid" placeholder="留空表示保留已保存值"></label><label>Access Token<input id="token" type="password" placeholder="留空表示保留已保存值"></label></div>
+<div id="modern" hidden><label>API Key<input id="apikey" type="password" placeholder="留空表示保留已保存值"></label></div>
+<label>语音识别模型<select id="resource">
+<option value="volc.seedasr.sauc.duration">豆包流式语音识别模型 2.0</option>
+<option value="volc.bigasr.sauc.duration">豆包流式语音识别模型 1.0</option>
+</select></label><label>接口<select id="endpoint"><option value="bigmodel_async">双向流式优化版</option><option value="bigmodel">双向流式标准版</option><option value="bigmodel_nostream">流式输入最终返回</option></select></label>
+<div class="checks"><label><input id="itn" type="checkbox">数字规范化</label><label><input id="punc" type="checkbox">自动标点</label><label><input id="ddc" type="checkbox">去口头禅</label></div>
+</section><section class="card"><h2>Windows 与 Codex</h2>
+<label>语音快捷键<input id="recordHotkey" placeholder="例如 F8、Ctrl+Space 或 Copilot"><small>按住说话，松开识别</small></label>
+<label>输出切换<input id="modeHotkey" placeholder="例如 Ctrl+Alt+9"><small>用于切换聚焦输入框和 Codex</small></label>
+<label>自动发现 Codex 任务<div class="codex-picker"><select id="threadSelect"><option>正在扫描本机任务…</option></select><button type="button" id="refreshThreads">刷新</button></div><small id="threadHelp">正在读取任务列表</small></label>
+<label class="auto-follow"><input id="autoFollowCodex" type="checkbox"><span><strong>自动跟随 Codex 当前激活任务</strong><small>按下语音键时自动识别并锁定当前任务，无需手工配置</small></span></label>
+<details><summary>备用任务设置</summary><label>Codex 任务 ID<input id="threadId" placeholder="仅在自动识别失败时使用"><small>可从上方任务列表选择，也可手工输入 UUID</small></label></details>
+<button id="save">保存配置</button><p id="saved">配置载入中</p><small id="configMeta"></small>
+<div class="status"><b id="state">待机</b><p id="message">按住 F8 开始说话</p><small id="target"></small></div>
+<label>最近识别文字<textarea id="lastText" readonly></textarea></label>
+</section></div>
+<footer>凭据由 Windows 当前用户 DPAPI 加密保存。普通输入模式不会自动按 Enter。</footer>
+</main><script src="/app.js"></script></body></html>

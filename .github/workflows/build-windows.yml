@@ -1,0 +1,26 @@
+name: build-windows
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          architecture: 'x64'
+      - name: Build
+        shell: powershell
+        run: .\build_windows.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VoiceIn-Windows
+          path: |
+            dist/VoiceIn-0.1.0-alpha-win-x64.exe
+            dist/VoiceIn-0.1.0-alpha-win-x64.exe.sha256
+            dist/VoiceIn-0.1.0-alpha-source.zip

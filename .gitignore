@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+*.log
+.pytest_cache/
+build/
+dist/
+*.spec.bak
+.venv/
+venv/
+
+# Local credentials and runtime configuration
+config.json
+*.tmp
+
+# Internal prototypes and machine-specific validation evidence
+volc_web/
+probe_*
+*-result.json
+volc-doc-*
+VoiceIn-文字接入验证.md
+VoiceIn-方案-重整速览.md
+VoiceIn-分阶段执行方案.md
+启动火山网页测试.cmd
